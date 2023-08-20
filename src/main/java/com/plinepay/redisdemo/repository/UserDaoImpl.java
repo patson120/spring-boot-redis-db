@@ -31,9 +31,23 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> fetchAllUser() {
-        List<User> users;
-        users = template.opsForHash().values(HASH_KEY);
-        return users;
+        return template.opsForHash().values(HASH_KEY);
+    }
+
+    @Override
+    public User fetchUserById(Long id) {
+        return (User) template.opsForHash().get(HASH_KEY, id);
+    }
+
+    @Override
+    public boolean deleteUserById(Long id) {
+        try {
+            template.opsForHash().delete(HASH_KEY, id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
     
 }

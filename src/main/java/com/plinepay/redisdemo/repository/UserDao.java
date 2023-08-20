@@ -9,5 +9,9 @@ public interface UserDao {
     boolean saveUser(User user);
 
     List<User> fetchAllUser();
+
+    User fetchUserById(Long id);
+
+    boolean deleteUserById(Long id);
     
 }
